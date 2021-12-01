@@ -2,7 +2,7 @@
 class Home{
     public function index()
     {
-        echo "Funciona el metodo";
+        echo "Funciona el metodo esto";
     }
 }
 
