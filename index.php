@@ -14,11 +14,21 @@
             for ($i=2; $i < count($array); $i++) { 
                 $parametro .= $array[$i]. ",";
             }
+            $parametro = trim($parametro, ",");
         }
     }
-    echo $controller;
-    echo $metodo;
-    echo $parametro;
+    $dirControllers = "Controllers/".$controller.".php";
+    if (file_exists($dirControllers)) {
+        require_once $dirControllers;
+        $controller = new $controller();
+        if (method_exists($controller, $metodo)) {
+            $controller->$metodo($parametro);
+        }else{
+            echo "No existe el metodo";
+        }
+    }else{
+        echo "No existe el controlador";
+    }
 
 
 
