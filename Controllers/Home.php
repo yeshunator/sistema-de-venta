@@ -2,7 +2,7 @@
 class Home extends Controller{
     public function index()
     {
-        //echo "Funciona el metodo esto";
+        $this->views->getView($this, "index");
     }
 }
 
