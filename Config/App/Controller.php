@@ -2,6 +2,7 @@
 class Controller{
     public function __construct()
     {
+        $this->views = new Views();
         $this->cargarModel();
     }
     public function cargarModel()
