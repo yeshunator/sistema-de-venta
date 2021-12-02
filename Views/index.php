@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login - SB Admin</title>
+        <title>Iniciar Session</title>
         <link href="<?php echo base_url; ?>Assets/css/styles.css" rel="stylesheet" />
         <script src="<?php echo base_url; ?>Assets/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -22,25 +22,17 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
+                                                <input class="form-control" id="inputUsuario" type="text" placeholder="Ingrese Usuario" />
+                                                <label for="inputUsuario"><i class="fas fa-user"></i> Usuario</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
-                                                <label for="inputPassword">Password</label>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                                <input class="form-control" id="inputPassword" type="password" placeholder="Ingrese contraseña" />
+                                                <label for="inputPassword"><i class="fas fa-key"></i> Contraseña</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="password.html">Forgot Password?</a>
                                                 <a class="btn btn-primary" href="index.html">Login</a>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +44,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div class="text-muted">Copyright &copy; Shopify-Ex <?php echo date("Y");?></div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
