@@ -4,9 +4,9 @@ class UsuariosModel extends Query{
     {
         parent::__construct();
     }
-    public function getUsuario()
+    public function getUsuario(String $usuario, String $clave)
     {
-        $sql = "SELECT * FROM usuarios";
+        $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave'";
         $data = $this->select($sql);
         return $data;
     }
