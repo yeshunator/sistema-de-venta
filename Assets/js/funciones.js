@@ -21,6 +21,9 @@ function frmLogin(e) {
                 const res = JSON.parse(this.responseText);
                 if (res == "ok") {
                     window.location = base_url + "Usuarios";
+                }else{
+                    document.getElementById("alerta").classList.remove("d-none");
+                    document.getElementById("alerta").innerHTML = res;
                 }
             }
         }

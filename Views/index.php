@@ -29,8 +29,11 @@
                                                 <input class="form-control" id="clave" name="clave" type="password" placeholder="Ingrese contraseña" />
                                                 <label for="clave"><i class="fas fa-key"></i> Contraseña</label>
                                             </div>
+                                            <div class="alert alert-primary alert-dismissible fade show d-none" id="alerta" role="alert">
+                                                
+                                            </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" type="submit" onclick="frmLogin(event);">Login</button>
+                                                <button type="button" class="btn btn-primary" onclick="frmLogin(event)">Iniciar Session</button>
                                             </div>
                                         </form>
                                     </div>

@@ -1,4 +1,4 @@
 <?php 
-print_r($_SESSION);
-
+include "ViewS/Templates/header.php";
 ?>
+<?php include "ViewS/Templates/footer.php"; ?>
