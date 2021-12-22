@@ -5,14 +5,29 @@ document.addEventListener("DOMContentLoaded", function(){
             url: base_url + "Usuarios/listar",
             dataSrc: ''
         },
-        columns: [{
-            'data' : 'id',
-            'data' : 'usuario',
-            'data' : 'nombre',
-            'data' : 'id_caja'
-         }]
+        columns: [ //PARA AGREGAR MAS COLUMNAS
+            {
+                'data': 'id'
+            },
+            {
+                'data': 'usuario'
+            },
+            {
+                'data': 'nombre'
+            },
+            {
+                'data': 'caja'
+            },
+            {
+                'data': 'estado'
+            },
+            {
+                'data': 'acciones'
+            }
+        ]
     });
 })
+// LA FUNCION DE LOGIN
 function frmLogin(e) {
     e.preventDefault();
     const usuario = document.getElementById("usuario");

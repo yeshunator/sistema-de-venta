@@ -12,7 +12,18 @@ class Usuarios extends Controller{
     }
     public function listar()
     {
-        $data = $this->model->getUsuarios();
+        $data = $this->model->getUsuarios(); //LOS BOTONES DE EDITAR Y ELIMINAR, Y TAMBIEN VER EL ESTADO
+        for ($i=0; $i < count($data); $i++) { 
+            if ($data[$i]['estado'] == 1) {
+                $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
+            }else{
+                $data[$i]['estado'] = '<span class="badge bg-danger">Inactivo</span>';
+            }
+            $data[$i]['acciones'] = '<div>
+            <button type="button" class="btn btn-primary">editar</button>
+            <button type="button" class="btn btn-danger">Eliminar</button>
+            </div>';
+        }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }

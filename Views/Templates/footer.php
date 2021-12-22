@@ -16,8 +16,8 @@
         </div>
         <script src="<?php echo base_url; ?>Assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url; ?>Assets/js/scripts.js"></script>
-        <!-- <script src="<?php echo base_url; ?>Assets/js/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="<?php echo base_url; ?>Assets/demo/chart-area-demo.js"></script>
+        <script src="<?php echo base_url; ?>Assets/js/Chart.min.js" crossorigin="anonymous"></script>
+        <!-- <script src="<?php echo base_url; ?>Assets/demo/chart-area-demo.js"></script>
         <script src="<?php echo base_url; ?>Assets/demo/chart-bar-demo.js"></script> -->
         <script src="<?php echo base_url; ?>Assets/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url; ?>Assets/DataTables/datatables.min.js"></script>
