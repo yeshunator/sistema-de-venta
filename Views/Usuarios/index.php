@@ -4,7 +4,8 @@ include "ViewS/Templates/header.php";
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">Usuarios</li>
 </ol>
-<button type="button" class="btn btn-primary mb-2">Nuevo</button>
+<!-- boton de crear nuevos usuarios -->
+<button type="button" class="btn btn-primary mb-2" onclick="frmUsuario()">Nuevo</button>
 <!-- Vista de las tablas -->
 <table class="table" id="tblUsuarios">
   <thead class="table-dark">
@@ -30,12 +31,41 @@ include "ViewS/Templates/header.php";
       </div>
       <div class="modal-body">
         <form method="post" id="frmUsuarios">
-        
+          <div class="form-group">
+            <label for="usuario">Usuario</label>
+            <input id="usuario" class="form-control" type="text" name="usuario" placeholder="Usuario">
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre del usuario">
+          </div>
+          <div class="row">
+             <div class="col-md-6">
+                 <div class="form-group">
+                      <label for="clave">Comtraseña</label>
+                      <input id="clave" class="form-control" type="password" name="clave" placeholder="Contraseña">
+                 </div>
+             </div>
+             <div class="col-md-6">
+                   <div class="form-group">
+                        <label for="confirmar">Confirmar Contraseña</label>
+                        <input id="confirmar" class="form-control" type="password" name="confirmar" placeholder="Confirmar contraseña">
+                   </div> 
+             </div>
+          </div>
+          <div class="form-group">
+            <label for="caja">Caja</label>
+            <select id="caja" class="form-control" name="caja">
+                <?php foreach ($data['cajas'] as $row) { ?>
+                     <option><?php echo $row['caja']; ?></option>
+                <?php } ?>
+            </select>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Registrar</button>
       </div>
     </div>
   </div>

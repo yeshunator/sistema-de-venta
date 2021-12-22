@@ -6,8 +6,9 @@ class Usuarios extends Controller{
     }
     public function index()
     {
+        $data['cajas'] = $this->model->getCajas();
         // print_r($this->model->getUsuario());
-        $this->views->getView($this, "index");
+        $this->views->getView($this, "index", $data);
 
     }
     public function listar()
