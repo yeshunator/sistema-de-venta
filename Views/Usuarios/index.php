@@ -57,7 +57,7 @@ include "ViewS/Templates/header.php";
             <label for="caja">Caja</label>
             <select id="caja" class="form-control" name="caja">
                 <?php foreach ($data['cajas'] as $row) { ?>
-                     <option><?php echo $row['caja']; ?></option>
+                     <option value="<?php echo $row['id']; ?>"><?php echo $row['caja']; ?></option>
                 <?php } ?>
             </select>
           </div>
@@ -65,7 +65,7 @@ include "ViewS/Templates/header.php";
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Registrar</button>
+        <button type="button" class="btn btn-primary" onclick="registrarUser(event)">Registrar</button>
       </div>
     </div>
   </div>

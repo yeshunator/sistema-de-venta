@@ -62,3 +62,59 @@ function frmLogin(e) {
 function frmUsuario() {
     $("#nuevo_usuario").modal("show");
 }
+function registrarUser(e) {
+    e.preventDefault();
+    const usuario = document.getElementById("usuario");
+    const nombre = document.getElementById("nombre");
+    const clave = document.getElementById("clave");
+    const confirmar = document.getElementById("confirmar");
+    const caja = document.getElementById("caja");
+    
+    if (usuario.value == "" || nombre.value == "" || clave.value == "" || caja.value == "") {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Todos los campos son obligatorios',
+            showConfirmButton: false,
+            timer: 2000
+          })
+    }else if(clave.value != confirmar.value) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Las Contraseñas no coinciden',
+            showConfirmButton: false,
+            timer: 2000
+          })
+    }else{
+        const url = base_url + "Usuarios/registrar";
+        const frm = document.getElementById("frmUsuarios");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "si") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Usuario Registrado con Exito',
+                        showConfirmButton: false,
+                        timer: 2000
+                      })
+                      frm.reset();
+                      $("#nuevo_usuario").modal("hide");
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: res,
+                        showConfirmButton: false,
+                        timer: 2000
+                      })
+                }
+            }
+        }
+    }
+}
