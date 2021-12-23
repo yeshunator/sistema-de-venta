@@ -19,7 +19,7 @@ class UsuariosModel extends Query{
     }
     public function getUsuarios()
     {
-        $sql = "SELECT u.*, c.id, c.caja FROM usuarios u INNER JOIN caja c WHERE u.id_caja = c.id"; /* para visualizar la tabla */
+        $sql = "SELECT u.*, c.id as id_caja, c.caja FROM usuarios u INNER JOIN caja c WHERE u.id_caja = c.id"; /* para visualizar la tabla */
         $data = $this->selectAll($sql);
         return $data;
     }
