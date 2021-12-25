@@ -26,20 +26,21 @@ include "ViewS/Templates/header.php";
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+        <h5 class="modal-title" id="title">Nuevo Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form method="post" id="frmUsuarios">
           <div class="form-group">
             <label for="usuario">Usuario</label>
+            <input type="hidden" id="id" name="id">
             <input id="usuario" class="form-control" type="text" name="usuario" placeholder="Usuario">
           </div>
           <div class="form-group">
             <label for="nombre">Nombre</label>
             <input id="nombre" class="form-control" type="text" name="nombre" placeholder="Nombre del usuario">
           </div>
-          <div class="row">
+          <div class="row" id="claves">
              <div class="col-md-6">
                  <div class="form-group">
                       <label for="clave">Comtraseña</label>
@@ -65,7 +66,7 @@ include "ViewS/Templates/header.php";
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="registrarUser(event)">Registrar</button>
+        <button type="button" class="btn btn-primary" onclick="registrarUser(event)" id="btnAccion">Registrar</button>
       </div>
     </div>
   </div>
