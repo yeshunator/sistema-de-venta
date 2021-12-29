@@ -5,7 +5,7 @@ include "ViewS/Templates/header.php";
     <li class="breadcrumb-item active">Usuarios</li>
 </ol>
 <!-- boton de crear nuevos usuarios -->
-<button type="button" class="btn btn-primary mb-2" onclick="frmUsuario()">Nuevo</button>
+<button type="button" class="btn btn-primary mb-2" onclick="frmUsuario()"><i class="fa fa-plus"></i></button>
 <!-- Vista de las tablas -->
 <table class="table" id="tblUsuarios">
   <thead class="table-dark">

@@ -148,6 +148,7 @@ function btnEditarUser(id) {
         }
     
 }
+// funcion para eliminar el usuario
 function btnEliminarUser(id) {
     Swal.fire({
         title: 'Estas seguro(a) de Eliminar?',
@@ -166,14 +167,64 @@ function btnEliminarUser(id) {
         http.send();
         http.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
+                const res = JSON.parse(this.responseText);
+                if (res == "ok") {
+                    Swal.fire(
+                        'Mensaje!',
+                        'Usuario eliminado con exito.',
+                        'success'
+                      )
+                      tblUsuarios.ajax.reload();
+                }else{
+                    Swal.fire(
+                        'Mensaje!',
+                        res,
+                        'error'
+                    )
+                }
             }
         }
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
+          
+        }
+      })
+}
+// funcion para reingresar el usuario
+function btnReingresarUser(id) {
+    Swal.fire({
+        title: 'Estas seguro(a) de Reingresar?',
+        text: "El usuario se cambiara a modo activo nuevamente",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si!',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        const url = base_url + "Usuarios/reingresar/"+id;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "ok") {
+                    Swal.fire(
+                        'Mensaje!',
+                        'Usuario reingresado con exito.',
+                        'success'
+                      )
+                      tblUsuarios.ajax.reload();
+                }else{
+                    Swal.fire(
+                        'Mensaje!',
+                        res,
+                        'error'
+                    )
+                }
+            }
+        }
+          
         }
       })
 }

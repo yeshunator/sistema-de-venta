@@ -21,8 +21,9 @@ class Usuarios extends Controller{
                 $data[$i]['estado'] = '<span class="badge bg-danger">Inactivo</span>';
             }
             $data[$i]['acciones'] = '<div>
-            <button type="button" class="btn btn-primary" onclick="btnEditarUser('.$data[$i]['id'].')">editar</button>
-            <button type="button" class="btn btn-danger" onclick="btnEliminarUser('.$data[$i]['id'].')">Eliminar</button>
+            <button type="button" class="btn btn-primary" onclick="btnEditarUser('.$data[$i]['id'].')"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" onclick="btnEliminarUser('.$data[$i]['id'].')"><i class="fas fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-success" onclick="btnReingresarUser('.$data[$i]['id'].')">Reingrensar</button>
             <div/>';
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -95,7 +96,25 @@ class Usuarios extends Controller{
     }
     public function eliminar(int $id)
     {
-        print_r($id);
+        $data = $this->model->accionUser(0, $id);
+        if ($data == 1) {
+            $msg = "ok";
+        }else{
+            $msg = "Error al eliminar el usuario";
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function reingresar(int $id)
+    {
+        $data = $this->model->accionUser(1, $id);
+        if ($data == 1) {
+            $msg = "ok";
+        }else{
+            $msg = "Error al reingresar el usuario";
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
     }
 }
 
