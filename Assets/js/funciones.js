@@ -148,3 +148,32 @@ function btnEditarUser(id) {
         }
     
 }
+function btnEliminarUser(id) {
+    Swal.fire({
+        title: 'Estas seguro(a) de Eliminar?',
+        text: "El usuario no se eliminara de forma permanente, solo cambiara el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si!',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        const url = base_url + "Usuarios/eliminar/"+id;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+        }
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+}

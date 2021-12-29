@@ -22,7 +22,7 @@ class Usuarios extends Controller{
             }
             $data[$i]['acciones'] = '<div>
             <button type="button" class="btn btn-primary" onclick="btnEditarUser('.$data[$i]['id'].')">editar</button>
-            <button type="button" class="btn btn-danger">Eliminar</button>
+            <button type="button" class="btn btn-danger" onclick="btnEliminarUser('.$data[$i]['id'].')">Eliminar</button>
             <div/>';
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -92,6 +92,10 @@ class Usuarios extends Controller{
         $data = $this->model->editarUser($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
+    }
+    public function eliminar(int $id)
+    {
+        print_r($id);
     }
 }
 

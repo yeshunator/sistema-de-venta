@@ -1,6 +1,6 @@
 <?php
 class UsuariosModel extends Query{
-    private $usuario, $nombre, $clave, $id_caja;
+    private $usuario, $nombre, $clave, $id_caja, $id;
     public function __construct()
     {
         parent::__construct();
@@ -69,6 +69,13 @@ class UsuariosModel extends Query{
         $sql = "SELECT * FROM usuarios WHERE id = $id";
         $data = $this->select($sql);
         return $data;
+    }
+    public function eliminarUser(int $id)
+    {
+        $this->id = $id;
+        $sql = "UPDATE usuarios SET estado = 0 WHERE id = ?";
+        $datos = array($this->id);
+        $data = $this->save($sql, $datos);
     }
 }
 
