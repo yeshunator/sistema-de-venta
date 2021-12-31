@@ -2,6 +2,9 @@
 class Usuarios extends Controller{
     public function __construct() {
         session_start();
+        if (empty($_SESSION['activo'])) {
+            header("location: ".base_url);
+        }
         parent::__construct();
     }
     public function index()
@@ -29,6 +32,7 @@ class Usuarios extends Controller{
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+    // FUNCION DE VALIDAR
     public function validar()
     {
         if (empty($_POST['usuario']) || empty($_POST['clave'])) {
@@ -36,11 +40,13 @@ class Usuarios extends Controller{
         }else{
             $usuario = $_POST['usuario'];
             $clave = $_POST['clave'];
-            $data = $this->model->getUsuario($usuario, $clave);
+            $hash = hash('sha256', $clave);
+            $data = $this->model->getUsuario($usuario, $hash);
             if ($data) {
                 $_SESSION['id_usuario'] = $data['id'];
                 $_SESSION['usuario'] = $data['usuario'];
                 $_SESSION['nombre'] = $data['nombre'];
+                $_SESSION['activo'] = true;
                 $msg = "ok";
 
             }else{
@@ -50,6 +56,7 @@ class Usuarios extends Controller{
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
+    // FUNCION DE REGISTRAR
     public function registrar()
     {
         $usuario = $_POST['usuario'];
@@ -88,12 +95,14 @@ class Usuarios extends Controller{
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
+    // FUNCION DE REGISTRAR
     public function editar(int $id)
     {
         $data = $this->model->editarUser($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+    // FUNCION DE ELIMINAR
     public function eliminar(int $id)
     {
         $data = $this->model->accionUser(0, $id);
@@ -105,6 +114,7 @@ class Usuarios extends Controller{
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
+    // FUNCION DE REINGRESAR
     public function reingresar(int $id)
     {
         $data = $this->model->accionUser(1, $id);
