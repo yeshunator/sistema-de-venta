@@ -1,8 +1,9 @@
-<?php 
-include "ViewS/Templates/header.php";
-?>
+<?php include "Views/Templates/header.php"; ?>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Usuarios</li>
+    <!-- <li class="breadcrumb-item active">Usuarios</li> NO BORRAR -->
+    <div class="alert alert-primary" role="alert">
+        Usuarios
+    </div>
 </ol>
 <!-- boton de crear nuevos usuarios -->
 <button type="button" class="btn btn-primary mb-2" onclick="frmUsuario()"><i class="fa fa-plus"></i></button>
@@ -72,4 +73,4 @@ include "ViewS/Templates/header.php";
   </div>
 </div>
 <!-- para que visualise el footer -->
-<?php include "ViewS/Templates/footer.php"; ?>
+<?php include "Views/Templates/footer.php"; ?>

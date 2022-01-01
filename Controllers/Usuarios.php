@@ -26,7 +26,7 @@ class Usuarios extends Controller{
             $data[$i]['acciones'] = '<div>
             <button type="button" class="btn btn-primary" onclick="btnEditarUser('.$data[$i]['id'].')"><i class="fas fa-edit"></i></button>
             <button type="button" class="btn btn-danger" onclick="btnEliminarUser('.$data[$i]['id'].')"><i class="fas fa-trash-alt"></i></button>
-            <button type="button" class="btn btn-success" onclick="btnReingresarUser('.$data[$i]['id'].')">Reingrensar</button>
+            <button type="button" class="btn btn-success" onclick="btnReingresarUser('.$data[$i]['id'].')"><i class="fa fa-reply-all"></i></button>
             <div/>';
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -125,6 +125,12 @@ class Usuarios extends Controller{
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
+    }
+    // FUNCION DE SALIR
+    public function salir()
+    {
+        session_destroy();
+        header("location: ".base_url);
     }
 }
 
