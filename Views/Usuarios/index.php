@@ -1,11 +1,12 @@
-<?php 
-include "ViewS/Templates/header.php";
-?>
+<?php include "Views/Templates/header.php"; ?>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Usuarios</li>
+    <!-- <li class="breadcrumb-item active">Usuarios</li> NO BORRAR -->
+    <div class="alert alert-primary" role="alert">
+        Usuarios
+    </div>
 </ol>
 <!-- boton de crear nuevos usuarios -->
-<button type="button" class="btn btn-primary mb-2" onclick="frmUsuario()">Nuevo</button>
+<button type="button" class="btn btn-primary mb-2" onclick="frmUsuario()"><i class="fa fa-plus"></i></button>
 <!-- Vista de las tablas -->
 <table class="table" id="tblUsuarios">
   <thead class="table-dark">
@@ -25,8 +26,8 @@ include "ViewS/Templates/header.php";
 <div class="modal fade" id="nuevo_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="title">Nuevo Usuario</h5>
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-white" id="title">Nuevo Usuario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -72,4 +73,4 @@ include "ViewS/Templates/header.php";
   </div>
 </div>
 <!-- para que visualise el footer -->
-<?php include "ViewS/Templates/footer.php"; ?>
+<?php include "Views/Templates/footer.php"; ?>
