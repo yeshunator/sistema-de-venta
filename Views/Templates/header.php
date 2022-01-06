@@ -46,6 +46,10 @@
                                     <a class="nav-link" href="layout-sidenav-light.html"><i class="fa fa-archive me-2"></i>Cajas</a>
                                 </nav>
                             </div>
+                            <a class="nav-link" href="<?php echo base_url; ?>Clientes">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Clientes
+                            </a>
                             
                         </div>
                     </div>
