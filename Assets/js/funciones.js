@@ -1,4 +1,4 @@
-let tblUsuarios, tblClientes;
+let tblUsuarios, tblClientes, tblCategorias;
 document.addEventListener("DOMContentLoaded", function(){
     tblUsuarios = $('#tblUsuarios').DataTable({
         ajax: {
@@ -47,6 +47,27 @@ document.addEventListener("DOMContentLoaded", function(){
             },
             {
                 'data': 'direccion'
+            },
+            {
+                'data': 'estado'
+            },
+            {
+                'data': 'acciones'
+            }
+        ]
+    });
+    // FIN DE LA TABLA CLIENTES
+    tblCategorias = $('#tblCategorias').DataTable({
+        ajax: {
+            url: base_url + "Categorias/listar",
+            dataSrc: ''
+        },
+        columns: [ //PARA AGREGAR MAS COLUMNAS
+            {
+                'data': 'id'
+            },
+            {
+                'data': 'nombre'
             },
             {
                 'data': 'estado'
@@ -267,6 +288,171 @@ function frmCliente() {
     document.getElementById("id").value = "";
 }
 // LA FUNCION DE REGISTRAR UN Cliente
+function registrarCate(e) {
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    
+    if (nombre.value == "") {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Todos los campos son obligatorios',
+            showConfirmButton: false,
+            timer: 3000
+          })
+    }else{
+        const url = base_url + "Categorias/registrar";
+        const frm = document.getElementById("frmCategoria");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "si") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Categoria Registrado con Exito',
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                      frm.reset();
+                      $("#nuevo_categoria").modal("hide");
+                      tblCategorias.ajax.reload();
+                }else if(res == "modificado"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Categoria Modificado con Exito',
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                      $("#nuevo_categoria").modal("hide");
+                      tblCategorias.ajax.reload();
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: res,
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                }
+            }
+        }
+    }
+}
+// FUNCION DE BOTON DE EDITAR Cliente
+function btnEditarCli(id) {
+    document.getElementById("title").innerHTML = "Actualizar Cliente";
+    document.getElementById("btnAccion").innerHTML = "Modificar";
+        const url = base_url + "Clientes/editar/"+id;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                res = JSON.parse(this.responseText);
+                document.getElementById("id").value = res.id;
+                document.getElementById("dni").value = res.dni;
+                document.getElementById("nombre").value = res.nombre;
+                document.getElementById("telefono").value = res.telefono;
+                document.getElementById("direccion").value = res.direccion;
+                $("#nuevo_cliente").modal("show");
+            }
+        }
+    
+}
+// funcion para eliminar el Cliente
+function btnEliminarCli(id) {
+    Swal.fire({
+        title: 'Estas seguro(a) de Eliminar?',
+        text: "El usuario no se eliminara de forma permanente, solo cambiara el estado a inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si!',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        const url = base_url + "Clientes/eliminar/"+id;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "ok") {
+                    Swal.fire(
+                        'Mensaje!',
+                        'Cliente eliminado con exito.',
+                        'success'
+                      )
+                      tblClientes.ajax.reload();
+                }else{
+                    Swal.fire(
+                        'Mensaje!',
+                        res,
+                        'error'
+                    )
+                }
+            }
+        }
+          
+        }
+      })
+}
+// funcion para reingresar el Cliente
+function btnReingresarCli(id) {
+    Swal.fire({
+        title: 'Estas seguro(a) de Reingresar?',
+        text: "El usuario se cambiara a modo activo nuevamente",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si!',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        const url = base_url + "Clientes/reingresar/"+id;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "ok") {
+                    Swal.fire(
+                        'Mensaje!',
+                        'Cliente reingresado con exito.',
+                        'success'
+                      )
+                      tblClientes.ajax.reload();
+                }else{
+                    Swal.fire(
+                        'Mensaje!',
+                        res,
+                        'error'
+                    )
+                }
+            }
+        }
+          
+        }
+      })
+}
+// --------------- FIN DE LA FUNCION DE CLIENTE ------------------
+function frmCategoria() {
+    document.getElementById("title").innerHTML = "Nuevo Categoria";
+    document.getElementById("btnAccion").innerHTML = "Registrar";
+    document.getElementById("frmCategoria").reset();
+    $("#nuevo_categoria").modal("show");
+    document.getElementById("id").value = "";
+}
+// LA FUNCION DE REGISTRAR UN Categoria
 function registrarCli(e) {
     e.preventDefault();
     const dni = document.getElementById("dni");
