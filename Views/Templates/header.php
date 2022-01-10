@@ -50,6 +50,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Clientes
                             </a>
+                            <a class="nav-link" href="<?php echo base_url; ?>Medidas">
+                                <div class="sb-nav-link-icon"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+                                Medidas
+                            </a>
                             <a class="nav-link" href="<?php echo base_url; ?>Categorias">
                                 <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i></div>
                                 Categorias
