@@ -49,17 +49,17 @@ class MedidasModel extends Query{
         
         return $res;
     }
-    public function editarCli(int $id)
+    public function editarMedi(int $id)
     {
-        $sql = "SELECT * FROM clientes WHERE id = $id";
+        $sql = "SELECT * FROM medidas WHERE id = $id";
         $data = $this->select($sql);
         return $data;
     }
-    public function accionCli(int $estado, int $id)
+    public function accionMedi(int $estado, int $id)
     {
         $this->id = $id;
         $this->estado = $estado;
-        $sql = "UPDATE clientes SET estado = ? WHERE id = ?";
+        $sql = "UPDATE medidas SET estado = ? WHERE id = ?";
         $datos = array($this->estado, $this->id);
         $data = $this->save($sql, $datos);
         return $data;

@@ -882,10 +882,10 @@ function registrarMedi(e) {
     }
 }
 // FUNCION DE BOTON DE EDITAR MEDIDAS
-function btnEditarCli(id) {
-    document.getElementById("title").innerHTML = "Actualizar Cliente";
+function btnEditarMedi(id) {
+    document.getElementById("title").innerHTML = "Actualizar Medida";
     document.getElementById("btnAccion").innerHTML = "Modificar";
-        const url = base_url + "Clientes/editar/"+id;
+        const url = base_url + "Medidas/editar/"+id;
         const http = new XMLHttpRequest();
         http.open("GET", url, true);
         http.send();
@@ -893,20 +893,18 @@ function btnEditarCli(id) {
             if (this.readyState == 4 && this.status == 200) {
                 res = JSON.parse(this.responseText);
                 document.getElementById("id").value = res.id;
-                document.getElementById("dni").value = res.dni;
                 document.getElementById("nombre").value = res.nombre;
-                document.getElementById("telefono").value = res.telefono;
-                document.getElementById("direccion").value = res.direccion;
-                $("#nuevo_cliente").modal("show");
+                document.getElementById("nombre_corto").value = res.nombre_corto;
+                $("#nuevo_medida").modal("show");
             }
         }
     
 }
 // funcion para eliminar el MEDIDAS
-function btnEliminarCli(id) {
+function btnEliminarMedi(id) {
     Swal.fire({
         title: 'Estas seguro(a) de Eliminar?',
-        text: "El cliente no se eliminara de forma permanente, solo cambiara el estado a inactivo",
+        text: "La Medida no se eliminara de forma permanente, solo cambiara el estado a inactivo",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -915,7 +913,7 @@ function btnEliminarCli(id) {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.isConfirmed) {
-        const url = base_url + "Clientes/eliminar/"+id;
+        const url = base_url + "Medidas/eliminar/"+id;
         const http = new XMLHttpRequest();
         http.open("GET", url, true);
         http.send();
@@ -925,10 +923,10 @@ function btnEliminarCli(id) {
                 if (res == "ok") {
                     Swal.fire(
                         'Mensaje!',
-                        'Cliente eliminado con exito.',
+                        'Medida eliminado con exito.',
                         'success'
                       )
-                      tblClientes.ajax.reload();
+                      tblMedidas.ajax.reload();
                 }else{
                     Swal.fire(
                         'Mensaje!',
@@ -943,10 +941,10 @@ function btnEliminarCli(id) {
       })
 }
 // funcion para reingresar el MEDIDAS
-function btnReingresarCli(id) {
+function btnReingresarMedi(id) {
     Swal.fire({
         title: 'Estas seguro(a) de Reingresar?',
-        text: "El cliente se cambiara a modo activo nuevamente",
+        text: "La Medida se cambiara a modo activo nuevamente",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -955,7 +953,7 @@ function btnReingresarCli(id) {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.isConfirmed) {
-        const url = base_url + "Clientes/reingresar/"+id;
+        const url = base_url + "Medidas/reingresar/"+id;
         const http = new XMLHttpRequest();
         http.open("GET", url, true);
         http.send();
@@ -965,10 +963,10 @@ function btnReingresarCli(id) {
                 if (res == "ok") {
                     Swal.fire(
                         'Mensaje!',
-                        'Cliente reingresado con exito.',
+                        'Medida reingresado con exito.',
                         'success'
                       )
-                      tblClientes.ajax.reload();
+                      tblMedidas.ajax.reload();
                 }else{
                     Swal.fire(
                         'Mensaje!',

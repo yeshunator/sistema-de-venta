@@ -67,14 +67,14 @@ class Medidas extends Controller{
     // FUNCION DE REGISTRAR
     public function editar(int $id)
     {
-        $data = $this->model->editarCli($id);
+        $data = $this->model->editarMedi($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
     // FUNCION DE ELIMINAR
     public function eliminar(int $id)
     {
-        $data = $this->model->accionCli(0, $id);
+        $data = $this->model->accionMedi(0, $id);
         if ($data == 1) {
             $msg = "ok";
         }else{
@@ -86,7 +86,7 @@ class Medidas extends Controller{
     // FUNCION DE REINGRESAR
     public function reingresar(int $id)
     {
-        $data = $this->model->accionCli(1, $id);
+        $data = $this->model->accionMedi(1, $id);
         if ($data == 1) {
             $msg = "ok";
         }else{
