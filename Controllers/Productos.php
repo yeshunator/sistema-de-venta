@@ -1,5 +1,5 @@
 <?php
-class Usuarios extends Controller{
+class Productos extends Controller{
     public function __construct() {
         session_start();
         
@@ -11,13 +11,13 @@ class Usuarios extends Controller{
             header("location: ".base_url);
         }
         $data['cajas'] = $this->model->getCajas();
-        // print_r($this->model->getUsuario());
+        // print_r($this->model->getProducto());
         $this->views->getView($this, "index", $data);
 
     }
     public function listar()
     {
-        $data = $this->model->getUsuarios(); //LOS BOTONES DE EDITAR Y ELIMINAR, Y TAMBIEN VER EL ESTADO
+        $data = $this->model->getProductos(); //LOS BOTONES DE EDITAR Y ELIMINAR, Y TAMBIEN VER EL ESTADO
         for ($i=0; $i < count($data); $i++) { 
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
@@ -39,16 +39,16 @@ class Usuarios extends Controller{
     // FUNCION DE VALIDAR
     public function validar()
     {
-        if (empty($_POST['usuario']) || empty($_POST['clave'])) {
+        if (empty($_POST['Producto']) || empty($_POST['clave'])) {
             $msg = "los campos estan vacios";
         }else{
-            $usuario = $_POST['usuario'];
+            $Producto = $_POST['Producto'];
             $clave = $_POST['clave'];
             $hash = hash('sha256', $clave);
-            $data = $this->model->getUsuario($usuario, $hash);
+            $data = $this->model->getProducto($Producto, $hash);
             if ($data) {
-                $_SESSION['id_usuario'] = $data['id'];
-                $_SESSION['usuario'] = $data['usuario'];
+                $_SESSION['id_Producto'] = $data['id'];
+                $_SESSION['Producto'] = $data['Producto'];
                 $_SESSION['nombre'] = $data['nombre'];
                 $_SESSION['activo'] = true;
                 $msg = "ok";
@@ -63,35 +63,35 @@ class Usuarios extends Controller{
     // FUNCION DE REGISTRAR
     public function registrar()
     {
-        $usuario = $_POST['usuario'];
+        $Producto = $_POST['Producto'];
         $nombre = $_POST['nombre'];
         $clave = $_POST['clave'];
         $confirmar = $_POST['confirmar'];
         $caja = $_POST['caja'];
         $id = $_POST['id'];
         $hash = hash("SHA256", $clave);
-        if (empty($usuario) || empty($nombre) || empty($caja)) {
+        if (empty($Producto) || empty($nombre) || empty($caja)) {
             $msg = "Todos los campos son obligatorios";
         }else{
             if ($id == "") {
                 if($clave != $confirmar){
                     $msg = "Las contraseñas no coinciden";
                 }else{
-                   $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $caja);
+                   $data = $this->model->registrarProducto($Producto, $nombre, $hash, $caja);
                    if ($data == "ok") {
                        $msg = "si";
                    }else if($data == "existe"){
-                       $msg = "El usuario ya existe";
+                       $msg = "El Producto ya existe";
                    }else{
-                       $msg = "Error al registrar el usuario";
+                       $msg = "Error al registrar el Producto";
                    } 
                 } 
             }else{
-                $data = $this->model->modificarUsuario($usuario, $nombre, $caja, $id);
+                $data = $this->model->modificarProducto($Producto, $nombre, $caja, $id);
                 if ($data == "modificado") {
                     $msg = "modificado";
                 }else{
-                    $msg = "Error al modificar el usuario";
+                    $msg = "Error al modificar el Producto";
                 } 
             }
             
@@ -113,7 +113,7 @@ class Usuarios extends Controller{
         if ($data == 1) {
             $msg = "ok";
         }else{
-            $msg = "Error al eliminar el usuario";
+            $msg = "Error al eliminar el Producto";
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
@@ -125,7 +125,7 @@ class Usuarios extends Controller{
         if ($data == 1) {
             $msg = "ok";
         }else{
-            $msg = "Error al reingresar el usuario";
+            $msg = "Error al reingresar el Producto";
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
