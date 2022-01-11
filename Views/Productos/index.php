@@ -5,7 +5,7 @@
         Productos
     </div>
 </ol>
-<!-- boton de crear nuevos Productos -->
+<!-- boton de crear nuevos Productos dsf -->
 <button type="button" class="btn btn-primary mb-2" onclick="frmProducto()"><i class="fa fa-plus"></i></button>
 <!-- Vista de las tablas -->
 <table class="table" id="tblProductos">
