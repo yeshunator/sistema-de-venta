@@ -67,13 +67,23 @@
                        </select>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                   <label for="categoria">Categoria</label>
+                       <select id="categoria" class="form-control" name="categoria">
+                         <?php foreach ($data['categorias'] as $row) { ?>
+                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
+                         <?php } ?>
+                       </select>
+                </div>
+              </div>
           </div>
           
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="registrarUser(event)" id="btnAccion">Registrar</button>
+        <button type="button" class="btn btn-primary" onclick="registrarPro(event)" id="btnAccion">Registrar</button>
       </div>
     </div>
   </div>

@@ -1,19 +1,19 @@
 <?php
 class ProductosModel extends Query{
-    private $Producto, $nombre, $clave, $id_caja, $id, $estado;
+    private $codigo, $nombre, $precio_compra, $precio_venta, $id_medida, $id_categoria, $id, $estado;
     public function __construct()
     {
         parent::__construct();
     }
-    public function getProducto(String $Producto, String $clave)
+    public function getMedidas()
     {
-        $sql = "SELECT * FROM Productos WHERE Producto = '$Producto' AND clave = '$clave'"; /* para verificar de login */
-        $data = $this->select($sql);
+        $sql = "SELECT * FROM medidas WHERE estado = 1";
+        $data = $this->selectAll($sql);
         return $data;
     }
-    public function getCajas()
+    public function getCategorias()
     {
-        $sql = "SELECT * FROM caja WHERE estado = 1";
+        $sql = "SELECT * FROM categorias WHERE estado = 1";
         $data = $this->selectAll($sql);
         return $data;
     }
@@ -23,17 +23,19 @@ class ProductosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarProducto(String $Producto, String $nombre, String $clave, int $id_caja)
+    public function registrarProducto(String $codigo, String $nombre, String $precio_compra, String $precio_venta, int $id_medida, int $id_categoria)
     {
-        $this->Producto = $Producto;
+        $this->codigo = $codigo;
         $this->nombre = $nombre;
-        $this->clave = $clave;
-        $this->id_caja = $id_caja;
-        $vericar = "SELECT * FROM Productos WHERE Producto = '$this->Producto'";
+        $this->precio_compra = $precio_compra;
+        $this->precio_venta = $precio_venta;
+        $this->id_medida = $id_medida;
+        $this->id_categoria = $id_categoria;
+        $vericar = "SELECT * FROM productos WHERE codigo = '$this->codigo'";
         $existe = $this->select($vericar);
         if (empty($existe)) {
             # code...
-            $sql = "INSERT INTO Productos(Producto, nombre, clave, id_caja) VALUES (?,?,?,?)";
+            $sql = "INSERT INTO productos(codigo, descripcion, precio_compra, precio_venta, id_medida, id_categoria) VALUES (?,?,?,?,?,?)";
             $datos = array($this->Producto, $this->nombre, $this->clave, $this->id_caja);
             $data = $this->save($sql, $datos);
             if ($data == 1) {

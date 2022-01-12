@@ -10,7 +10,8 @@ class Productos extends Controller{
         if (empty($_SESSION['activo'])) {
             header("location: ".base_url);
         }
-        $data['cajas'] = $this->model->getCajas();
+        $data['medidas'] = $this->model->getMedidas();
+        $data['categorias'] = $this->model->getCategorias();
         // print_r($this->model->getProducto());
         $this->views->getView($this, "index", $data);
 
@@ -36,48 +37,21 @@ class Productos extends Controller{
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
-    // FUNCION DE VALIDAR
-    public function validar()
-    {
-        if (empty($_POST['Producto']) || empty($_POST['clave'])) {
-            $msg = "los campos estan vacios";
-        }else{
-            $Producto = $_POST['Producto'];
-            $clave = $_POST['clave'];
-            $hash = hash('sha256', $clave);
-            $data = $this->model->getProducto($Producto, $hash);
-            if ($data) {
-                $_SESSION['id_Producto'] = $data['id'];
-                $_SESSION['Producto'] = $data['Producto'];
-                $_SESSION['nombre'] = $data['nombre'];
-                $_SESSION['activo'] = true;
-                $msg = "ok";
-
-            }else{
-                $msg = "contraseña incorrecta";
-            }
-        }
-        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        die();
-    }
     // FUNCION DE REGISTRAR
     public function registrar()
     {
-        $Producto = $_POST['Producto'];
+        $codigo = $_POST['codigo'];
         $nombre = $_POST['nombre'];
-        $clave = $_POST['clave'];
-        $confirmar = $_POST['confirmar'];
-        $caja = $_POST['caja'];
+        $precio_compra = $_POST['precio_compra'];
+        $precio_venta = $_POST['precio_venta'];
+        $medida = $_POST['medida'];
+        $categoria = $_POST['categoria'];
         $id = $_POST['id'];
-        $hash = hash("SHA256", $clave);
-        if (empty($Producto) || empty($nombre) || empty($caja)) {
+        if (empty($codigo) || empty($nombre) || empty($precio_compra) || empty($precio_venta)) {
             $msg = "Todos los campos son obligatorios";
         }else{
             if ($id == "") {
-                if($clave != $confirmar){
-                    $msg = "Las contraseñas no coinciden";
-                }else{
-                   $data = $this->model->registrarProducto($Producto, $nombre, $hash, $caja);
+                   $data = $this->model->registrarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria);
                    if ($data == "ok") {
                        $msg = "si";
                    }else if($data == "existe"){
@@ -85,7 +59,6 @@ class Productos extends Controller{
                    }else{
                        $msg = "Error al registrar el Producto";
                    } 
-                } 
             }else{
                 $data = $this->model->modificarProducto($Producto, $nombre, $caja, $id);
                 if ($data == "modificado") {
