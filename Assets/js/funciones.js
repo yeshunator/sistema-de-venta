@@ -1,4 +1,4 @@
-let tblUsuarios, tblClientes, tblCategorias, tblCajas, tblMedidas;
+let tblUsuarios, tblClientes, tblCategorias, tblCajas, tblMedidas, tblProductos;
 document.addEventListener("DOMContentLoaded", function(){
     tblUsuarios = $('#tblUsuarios').DataTable({
         ajax: {
@@ -113,6 +113,36 @@ document.addEventListener("DOMContentLoaded", function(){
             },
             {
                 'data': 'nombre_corto'
+            },
+            {
+                'data': 'estado'
+            },
+            {
+                'data': 'acciones'
+            }
+        ]
+    });
+    // FIN DE LA TABLA MEDIDAS
+    tblProductos = $('#tblProductos').DataTable({
+        ajax: {
+            url: base_url + "Productos/listar",
+            dataSrc: ''
+        },
+        columns: [ //PARA AGREGAR MAS COLUMNAS
+            {
+                'data': 'id'
+            },
+            {
+                'data': 'codigo'
+            },
+            {
+                'data': 'descripcion'
+            },
+            {
+                'data': 'precio_venta'
+            },
+            {
+                'data': 'cantidad'
             },
             {
                 'data': 'estado'
@@ -982,47 +1012,46 @@ function registrarPro(e) {
         http.send(new FormData(frm));
         http.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-                // const res = JSON.parse(this.responseText);
-                // if (res == "si") {
-                //     Swal.fire({
-                //         position: 'top-end',
-                //         icon: 'success',
-                //         title: 'Usuario Registrado con Exito',
-                //         showConfirmButton: false,
-                //         timer: 3000
-                //       })
-                //       frm.reset();
-                //       $("#nuevo_usuario").modal("hide");
-                //       tblUsuarios.ajax.reload();
-                // }else if(res == "modificado"){
-                //     Swal.fire({
-                //         position: 'top-end',
-                //         icon: 'success',
-                //         title: 'Usuario Modificado con Exito',
-                //         showConfirmButton: false,
-                //         timer: 3000
-                //       })
-                //       $("#nuevo_usuario").modal("hide");
-                //       tblUsuarios.ajax.reload();
-                // }else{
-                //     Swal.fire({
-                //         position: 'top-end',
-                //         icon: 'error',
-                //         title: res,
-                //         showConfirmButton: false,
-                //         timer: 3000
-                //       })
-                // }
+                const res = JSON.parse(this.responseText);
+                if (res == "si") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Producto Registrado con Exito',
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                      frm.reset();
+                      $("#nuevo_producto").modal("hide");
+                      tblProductos.ajax.reload();
+                }else if(res == "modificado"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Producto Modificado con Exito',
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                      $("#nuevo_producto").modal("hide");
+                      tblProductos.ajax.reload();
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: res,
+                        showConfirmButton: false,
+                        timer: 3000
+                      })
+                }
             }
         }
     }
 }
 // FUNCION DE BOTON DE EDITAR PRODUCTO
-function btnEditarUser(id) {
-    document.getElementById("title").innerHTML = "Actualizar Usuario";
+function btnEditarPro(id) {
+    document.getElementById("title").innerHTML = "Actualizar Producto";
     document.getElementById("btnAccion").innerHTML = "Modificar";
-        const url = base_url + "Usuarios/editar/"+id;
+        const url = base_url + "Productos/editar/"+id;
         const http = new XMLHttpRequest();
         http.open("GET", url, true);
         http.send();
@@ -1030,20 +1059,22 @@ function btnEditarUser(id) {
             if (this.readyState == 4 && this.status == 200) {
                 res = JSON.parse(this.responseText);
                 document.getElementById("id").value = res.id;
-                document.getElementById("usuario").value = res.usuario;
-                document.getElementById("nombre").value = res.nombre;
-                document.getElementById("caja").value = res.id_caja;
-                document.getElementById("claves").classList.add("d-none");
-                $("#nuevo_usuario").modal("show");
+                document.getElementById("codigo").value = res.codigo;
+                document.getElementById("nombre").value = res.descripcion;
+                document.getElementById("precio_compra").value = res.precio_compra;
+                document.getElementById("precio_venta").value = res.precio_venta;
+                document.getElementById("medida").value = res.id_medida;
+                document.getElementById("categoria").value = res.id_categoria;
+                $("#nuevo_producto").modal("show");
             }
         }
     
 }
 // funcion para eliminar el PRODUCTO
-function btnEliminarUser(id) {
+function btnEliminarPro(id) {
     Swal.fire({
         title: 'Estas seguro(a) de Eliminar?',
-        text: "El usuario no se eliminara de forma permanente, solo cambiara el estado a inactivo",
+        text: "El Producto no se eliminara de forma permanente, solo cambiara el estado a inactivo",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1052,7 +1083,7 @@ function btnEliminarUser(id) {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.isConfirmed) {
-        const url = base_url + "Usuarios/eliminar/"+id;
+        const url = base_url + "Productos/eliminar/"+id;
         const http = new XMLHttpRequest();
         http.open("GET", url, true);
         http.send();
@@ -1062,10 +1093,10 @@ function btnEliminarUser(id) {
                 if (res == "ok") {
                     Swal.fire(
                         'Mensaje!',
-                        'Usuario eliminado con exito.',
+                        'Producto eliminado con exito.',
                         'success'
                       )
-                      tblUsuarios.ajax.reload();
+                      tblProductos.ajax.reload();
                 }else{
                     Swal.fire(
                         'Mensaje!',
@@ -1080,10 +1111,10 @@ function btnEliminarUser(id) {
       })
 }
 // funcion para reingresar el PRODUCTO
-function btnReingresarUser(id) {
+function btnReingresarPro(id) {
     Swal.fire({
         title: 'Estas seguro(a) de Reingresar?',
-        text: "El usuario se cambiara a modo activo nuevamente",
+        text: "El Producto se cambiara a modo activo nuevamente",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1092,7 +1123,7 @@ function btnReingresarUser(id) {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.isConfirmed) {
-        const url = base_url + "Usuarios/reingresar/"+id;
+        const url = base_url + "Productos/reingresar/"+id;
         const http = new XMLHttpRequest();
         http.open("GET", url, true);
         http.send();
@@ -1102,10 +1133,10 @@ function btnReingresarUser(id) {
                 if (res == "ok") {
                     Swal.fire(
                         'Mensaje!',
-                        'Usuario reingresado con exito.',
+                        'Producto reingresado con exito.',
                         'success'
                       )
-                      tblUsuarios.ajax.reload();
+                      tblProductos.ajax.reload();
                 }else{
                     Swal.fire(
                         'Mensaje!',

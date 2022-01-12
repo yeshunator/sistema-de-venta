@@ -52,7 +52,7 @@
              <div class="col-md-6">
                  <div class="form-group">
                       <label for="precio_venta">Precio Venta</label>
-                      <input id="precio_venta" class="form-control" type="text" name="precio_venta" placeholder="Precio de la vemta">
+                      <input id="precio_venta" class="form-control" type="text" name="precio_venta" placeholder="Precio de la venta">
                  </div>
              </div>
           </div>

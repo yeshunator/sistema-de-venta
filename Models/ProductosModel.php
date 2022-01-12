@@ -19,7 +19,7 @@ class ProductosModel extends Query{
     }
     public function getProductos()
     {
-        $sql = "SELECT u.*, c.id as id_caja, c.caja FROM Productos u INNER JOIN caja c WHERE u.id_caja = c.id"; /* para visualizar la tabla */
+        $sql = "SELECT p.*, m.id AS id_medida, m.nombre AS medida, c.id AS id_categoria, c.nombre AS categoria FROM productos p INNER JOIN medidas m ON p.id_medida = m.id INNER JOIN categorias c ON p.id_categoria = c.id"; /* para visualizar la tabla */
         $data = $this->selectAll($sql);
         return $data;
     }
@@ -36,7 +36,7 @@ class ProductosModel extends Query{
         if (empty($existe)) {
             # code...
             $sql = "INSERT INTO productos(codigo, descripcion, precio_compra, precio_venta, id_medida, id_categoria) VALUES (?,?,?,?,?,?)";
-            $datos = array($this->Producto, $this->nombre, $this->clave, $this->id_caja);
+            $datos = array($this->codigo, $this->nombre, $this->precio_compra, $this->precio_venta, $this->id_medida, $this->id_categoria);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
             $res = "ok";
@@ -49,14 +49,17 @@ class ProductosModel extends Query{
         
         return $res;
     }
-    public function modificarProducto(String $Producto, String $nombre, int $id_caja, int $id)
+    public function modificarProducto(String $codigo, String $nombre, String $precio_compra, String $precio_venta, int $id_medida, int $id_categoria, int $id)
     {
-        $this->Producto = $Producto;
+        $this->codigo = $codigo;
         $this->nombre = $nombre;
+        $this->precio_compra = $precio_compra;
+        $this->precio_venta = $precio_venta;
+        $this->id_medida = $id_medida;
+        $this->id_categoria = $id_categoria;
         $this->id = $id;
-        $this->id_caja = $id_caja;
-        $sql = "UPDATE Productos SET Producto = ?, nombre = ?, id_caja = ? WHERE id = ?";
-        $datos = array($this->Producto, $this->nombre, $this->id_caja, $this->id);
+        $sql = "UPDATE productos SET codigo = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, id_medida = ?, id_categoria = ? WHERE id = ?";
+        $datos = array($this->codigo, $this->nombre, $this->precio_compra, $this->precio_venta, $this->id_medida, $this->id_categoria, $this->id);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "modificado";
@@ -66,17 +69,17 @@ class ProductosModel extends Query{
         
         return $res;
     }
-    public function editarUser(int $id)
+    public function editarPro(int $id)
     {
-        $sql = "SELECT * FROM Productos WHERE id = $id";
+        $sql = "SELECT * FROM productos WHERE id = $id";
         $data = $this->select($sql);
         return $data;
     }
-    public function accionUser(int $estado, int $id)
+    public function accionPro(int $estado, int $id)
     {
         $this->id = $id;
         $this->estado = $estado;
-        $sql = "UPDATE Productos SET estado = ? WHERE id = ?";
+        $sql = "UPDATE productos SET estado = ? WHERE id = ?";
         $datos = array($this->estado, $this->id);
         $data = $this->save($sql, $datos);
         return $data;

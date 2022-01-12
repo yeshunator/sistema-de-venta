@@ -23,13 +23,13 @@ class Productos extends Controller{
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
                 $data[$i]['acciones'] = '<div>
-                <button type="button" class="btn btn-primary" onclick="btnEditarUser('.$data[$i]['id'].')"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn btn-danger" onclick="btnEliminarUser('.$data[$i]['id'].')"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-primary" onclick="btnEditarPro('.$data[$i]['id'].')"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" onclick="btnEliminarPro('.$data[$i]['id'].')"><i class="fas fa-trash-alt"></i></button>
                 <div/>';
             }else{
                 $data[$i]['estado'] = '<span class="badge bg-danger">Inactivo</span>';
                 $data[$i]['acciones'] = '<div>
-                <button type="button" class="btn btn-success" onclick="btnReingresarUser('.$data[$i]['id'].')"><i class="fa fa-reply-all"></i></button>
+                <button type="button" class="btn btn-success" onclick="btnReingresarPro('.$data[$i]['id'].')"><i class="fa fa-reply-all"></i></button>
                 <div/>';
             }
             
@@ -60,7 +60,7 @@ class Productos extends Controller{
                        $msg = "Error al registrar el Producto";
                    } 
             }else{
-                $data = $this->model->modificarProducto($Producto, $nombre, $caja, $id);
+                $data = $this->model->modificarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria, $id);
                 if ($data == "modificado") {
                     $msg = "modificado";
                 }else{
@@ -75,14 +75,14 @@ class Productos extends Controller{
     // FUNCION DE REGISTRAR
     public function editar(int $id)
     {
-        $data = $this->model->editarUser($id);
+        $data = $this->model->editarPro($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
     // FUNCION DE ELIMINAR
     public function eliminar(int $id)
     {
-        $data = $this->model->accionUser(0, $id);
+        $data = $this->model->accionPro(0, $id);
         if ($data == 1) {
             $msg = "ok";
         }else{
@@ -94,7 +94,7 @@ class Productos extends Controller{
     // FUNCION DE REINGRESAR
     public function reingresar(int $id)
     {
-        $data = $this->model->accionUser(1, $id);
+        $data = $this->model->accionPro(1, $id);
         if ($data == 1) {
             $msg = "ok";
         }else{

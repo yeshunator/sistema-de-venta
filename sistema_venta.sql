@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-01-2022 a las 05:35:02
+-- Tiempo de generación: 12-01-2022 a las 23:41:59
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.0
 
@@ -121,11 +121,18 @@ CREATE TABLE `productos` (
   `descripcion` varchar(255) NOT NULL,
   `precio_compra` decimal(10,2) NOT NULL,
   `precio_venta` decimal(10,2) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL DEFAULT 0,
   `id_medida` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `codigo`, `descripcion`, `precio_compra`, `precio_venta`, `cantidad`, `id_medida`, `id_categoria`, `estado`) VALUES
+(1, '7414', 'cuaderno rojo modificado', '5.00', '10.00', 0, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -229,7 +236,7 @@ ALTER TABLE `medidas`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
