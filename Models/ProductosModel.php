@@ -1,6 +1,6 @@
 <?php
 class ProductosModel extends Query{
-    private $codigo, $nombre, $precio_compra, $precio_venta, $id_medida, $id_categoria, $id, $estado;
+    private $codigo, $nombre, $precio_compra, $precio_venta, $id_medida, $id_categoria, $id, $estado, $img;
     public function __construct()
     {
         parent::__construct();
@@ -23,7 +23,7 @@ class ProductosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarProducto(String $codigo, String $nombre, String $precio_compra, String $precio_venta, int $id_medida, int $id_categoria)
+    public function registrarProducto(String $codigo, String $nombre, String $precio_compra, String $precio_venta, int $id_medida, int $id_categoria, String $img)
     {
         $this->codigo = $codigo;
         $this->nombre = $nombre;
@@ -31,12 +31,13 @@ class ProductosModel extends Query{
         $this->precio_venta = $precio_venta;
         $this->id_medida = $id_medida;
         $this->id_categoria = $id_categoria;
+        $this->img = $img;
         $vericar = "SELECT * FROM productos WHERE codigo = '$this->codigo'";
         $existe = $this->select($vericar);
         if (empty($existe)) {
             # code...
-            $sql = "INSERT INTO productos(codigo, descripcion, precio_compra, precio_venta, id_medida, id_categoria) VALUES (?,?,?,?,?,?)";
-            $datos = array($this->codigo, $this->nombre, $this->precio_compra, $this->precio_venta, $this->id_medida, $this->id_categoria);
+            $sql = "INSERT INTO productos(codigo, descripcion, precio_compra, precio_venta, id_medida, id_categoria, foto) VALUES (?,?,?,?,?,?,?)";
+            $datos = array($this->codigo, $this->nombre, $this->precio_compra, $this->precio_venta, $this->id_medida, $this->id_categoria, $this->img);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
             $res = "ok";

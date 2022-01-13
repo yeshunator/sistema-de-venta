@@ -20,6 +20,7 @@ class Productos extends Controller{
     {
         $data = $this->model->getProductos(); //LOS BOTONES DE EDITAR Y ELIMINAR, Y TAMBIEN VER EL ESTADO
         for ($i=0; $i < count($data); $i++) { 
+            $data[$i]['imagen'] = '<img class="img-thumbnail" src="'. base_url. "Assets/img/".$data[$i]['foto'].'" width="100">';
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
                 $data[$i]['acciones'] = '<div>
@@ -47,13 +48,21 @@ class Productos extends Controller{
         $medida = $_POST['medida'];
         $categoria = $_POST['categoria'];
         $id = $_POST['id'];
+        $img = $_FILES['imagen'];
+        $name = $img['name'];
+        $tmpname = $img['tmp_name'];
+        $destino = "Assets/img/".$name;
+        if (empty($name)) {
+            $name = "default.jpg";
+        }
         if (empty($codigo) || empty($nombre) || empty($precio_compra) || empty($precio_venta)) {
             $msg = "Todos los campos son obligatorios";
         }else{
             if ($id == "") {
-                   $data = $this->model->registrarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria);
+                   $data = $this->model->registrarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria, $name);
                    if ($data == "ok") {
                        $msg = "si";
+                       move_uploaded_file($tmpname, $destino);
                    }else if($data == "existe"){
                        $msg = "El Producto ya existe";
                    }else{

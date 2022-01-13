@@ -12,6 +12,7 @@
   <thead class="table-dark">
       <tr>
           <th>Id</th>
+          <th>Imagen</th>
           <th>Codigo</th>
           <th>Descripcion</th>
           <th>Precio</th>
@@ -76,6 +77,21 @@
                          <?php } ?>
                        </select>
                 </div>
+              </div>
+              <div class="col-md-12">
+              <div class="form-group">
+                      <label>Foto</label>
+                      <div class="card border-primary">
+                        <div class="card-body">
+                          <label for="imagen" class="btn btn-primary" id="icon-image"><i class="fas fa-image"></i></label>
+                          <span id="icon-cerrar"></span>
+                        <input id="imagen" class="d-none" type="file" name="imagen" onchange="preview(event)">
+                        <input type="hidden" id="foto_actual">
+                        <input type="hidden" id="foto_delete">
+                        <img class="img-thumbnail" id="img-preview">
+                        </div>
+                      </div>
+                 </div>
               </div>
           </div>
           

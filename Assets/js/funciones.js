@@ -133,6 +133,9 @@ document.addEventListener("DOMContentLoaded", function(){
                 'data': 'id'
             },
             {
+                'data': 'imagen'
+            },
+            {
                 'data': 'codigo'
             },
             {
@@ -158,8 +161,8 @@ function frmUsuario() {
     document.getElementById("btnAccion").innerHTML = "Registrar";
     document.getElementById("claves").classList.remove("d-none");
     document.getElementById("frmUsuarios").reset();
-    $("#nuevo_usuario").modal("show");
     document.getElementById("id").value = "";
+    $("#nuevo_usuario").modal("show");
 }
 // LA FUNCION DE REGISTRAR UN USUARIO
 function registrarUser(e) {
@@ -983,8 +986,9 @@ function frmProducto() {
     document.getElementById("title").innerHTML = "Nuevo Producto";
     document.getElementById("btnAccion").innerHTML = "Registrar";
     document.getElementById("frmProductos").reset();
-    $("#nuevo_producto").modal("show");
     document.getElementById("id").value = "";
+    $("#nuevo_producto").modal("show");
+    deleteImg();
 }
 // LA FUNCION DE REGISTRAR UN PRODUCTO
 function registrarPro(e) {
@@ -1065,6 +1069,10 @@ function btnEditarPro(id) {
                 document.getElementById("precio_venta").value = res.precio_venta;
                 document.getElementById("medida").value = res.id_medida;
                 document.getElementById("categoria").value = res.id_categoria;
+                document.getElementById("img-preview").src = base_url + 'Assets/img/'+ res.foto;
+                document.getElementById("icon-cerrar").innerHTML = `
+                <button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button>`;
+                document.getElementById("icon-image").classList.add("d-none");
                 $("#nuevo_producto").modal("show");
             }
         }
@@ -1149,4 +1157,22 @@ function btnReingresarPro(id) {
           
         }
       })
+}
+
+// FUNCION DE SUBIR, VER Y ELIMINAR IMAGENES
+function preview(e) {
+    const url = e.target.files[0];
+    const urlTmp = URL.createObjectURL(url);
+    document.getElementById("img-preview").src = urlTmp;
+    document.getElementById("icon-image").classList.add("d-none");
+    document.getElementById("icon-cerrar").innerHTML = `
+    <button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button>
+    ${url['name']}`;
+}
+
+function deleteImg() {
+    document.getElementById("icon-cerrar").innerHTML = '';
+    document.getElementById("icon-image").classList.remove("d-none");
+    document.getElementById("img-preview").src = '';
+    document.getElementById("imagen").value = '';
 }
