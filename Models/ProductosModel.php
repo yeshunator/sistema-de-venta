@@ -50,7 +50,7 @@ class ProductosModel extends Query{
         
         return $res;
     }
-    public function modificarProducto(String $codigo, String $nombre, String $precio_compra, String $precio_venta, int $id_medida, int $id_categoria, int $id)
+    public function modificarProducto(String $codigo, String $nombre, String $precio_compra, String $precio_venta, int $id_medida, int $id_categoria, String $img, int $id)
     {
         $this->codigo = $codigo;
         $this->nombre = $nombre;
@@ -58,9 +58,10 @@ class ProductosModel extends Query{
         $this->precio_venta = $precio_venta;
         $this->id_medida = $id_medida;
         $this->id_categoria = $id_categoria;
+        $this->img = $img;
         $this->id = $id;
-        $sql = "UPDATE productos SET codigo = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, id_medida = ?, id_categoria = ? WHERE id = ?";
-        $datos = array($this->codigo, $this->nombre, $this->precio_compra, $this->precio_venta, $this->id_medida, $this->id_categoria, $this->id);
+        $sql = "UPDATE productos SET codigo = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, id_medida = ?, id_categoria = ?, foto = ? WHERE id = ?";
+        $datos = array($this->codigo, $this->nombre, $this->precio_compra, $this->precio_venta, $this->id_medida, $this->id_categoria, $this->img, $this->id);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "modificado";

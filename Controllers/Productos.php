@@ -53,7 +53,7 @@ class Productos extends Controller{
         $tmpname = $img['tmp_name'];
         $destino = "Assets/img/".$name;
         if (empty($name)) {
-            $name = "default.jpg";
+            $name = "default.png";
         }
         if (empty($codigo) || empty($nombre) || empty($precio_compra) || empty($precio_venta)) {
             $msg = "Todos los campos son obligatorios";
@@ -69,12 +69,22 @@ class Productos extends Controller{
                        $msg = "Error al registrar el Producto";
                    } 
             }else{
-                $data = $this->model->modificarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria, $id);
-                if ($data == "modificado") {
-                    $msg = "modificado";
-                }else{
-                    $msg = "Error al modificar el Producto";
-                } 
+                if ($_POST['foto_actual'] != $_POST['foto_delete']) {
+                    $imgDelete = $this->model->editarPro($id);
+                    if ($imgDelete['foto'] != 'default.png' || $imgDelete['foto'] != "") {
+                        if (file_exists($destino . $imgDelete['foto'])) {
+                            unlink($destino . $imgDelete['foto']);
+                        }
+                    }
+                    $data = $this->model->modificarProducto($codigo, $nombre, $precio_compra, $precio_venta, $medida, $categoria, $name, $id);
+                    if ($data == "modificado") {
+                        $msg = "modificado";
+                        move_uploaded_file($tmpname, $destino);
+                    }else{
+                        $msg = "Error al modificar el Producto";
+                    }  
+                }
+                
             }
             
         }

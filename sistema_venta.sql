@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-01-2022 a las 23:41:59
+-- Tiempo de generación: 14-01-2022 a las 02:46:39
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.0
 
@@ -124,6 +124,7 @@ CREATE TABLE `productos` (
   `cantidad` int(11) NOT NULL DEFAULT 0,
   `id_medida` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
+  `foto` varchar(50) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -131,8 +132,11 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `codigo`, `descripcion`, `precio_compra`, `precio_venta`, `cantidad`, `id_medida`, `id_categoria`, `estado`) VALUES
-(1, '7414', 'cuaderno rojo modificado', '5.00', '10.00', 0, 1, 4, 1);
+INSERT INTO `productos` (`id`, `codigo`, `descripcion`, `precio_compra`, `precio_venta`, `cantidad`, `id_medida`, `id_categoria`, `foto`, `estado`) VALUES
+(1, '7414', 'cuaderno rojo modificado', '5.00', '10.00', 0, 1, 4, 'default.png', 1),
+(2, '456', 'imagen modificado', '40.00', '50.00', 0, 1, 3, 'default.png', 1),
+(3, '123', 'sdadaqw', '80.00', '100.00', 0, 1, 1, 'default.png', 1),
+(5, '956', 'sdasd', '40.00', '80.00', 0, 1, 1, 'default.png', 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +240,7 @@ ALTER TABLE `medidas`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
