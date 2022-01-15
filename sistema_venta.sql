@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-01-2022 a las 01:48:31
+-- Tiempo de generación: 14-01-2022 a las 02:46:39
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.0
 
@@ -112,6 +112,35 @@ INSERT INTO `medidas` (`id`, `nombre`, `nombre_corto`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `id` int(11) NOT NULL,
+  `codigo` varchar(30) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `precio_compra` decimal(10,2) NOT NULL,
+  `precio_venta` decimal(10,2) NOT NULL,
+  `cantidad` int(11) NOT NULL DEFAULT 0,
+  `id_medida` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `foto` varchar(50) NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `codigo`, `descripcion`, `precio_compra`, `precio_venta`, `cantidad`, `id_medida`, `id_categoria`, `foto`, `estado`) VALUES
+(1, '7414', 'cuaderno rojo modificado', '5.00', '10.00', 0, 1, 4, 'default.png', 1),
+(2, '456', 'imagen modificado', '40.00', '50.00', 0, 1, 3, 'default.png', 1),
+(3, '123', 'sdadaqw', '80.00', '100.00', 0, 1, 1, 'default.png', 1),
+(5, '956', 'sdasd', '40.00', '80.00', 0, 1, 1, 'default.png', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -163,6 +192,16 @@ ALTER TABLE `medidas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_medida` (`id_medida`),
+  ADD KEY `id_categoria` (`id_categoria`),
+  ADD KEY `id_categoria_2` (`id_categoria`),
+  ADD KEY `id_medida_2` (`id_medida`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -198,6 +237,12 @@ ALTER TABLE `medidas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -206,6 +251,13 @@ ALTER TABLE `usuarios`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `producto_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`),
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_medida`) REFERENCES `medidas` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`

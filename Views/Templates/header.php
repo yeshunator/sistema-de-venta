@@ -36,7 +36,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tools"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tools text-primary"></i></div>
                                 Configuracion
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -47,16 +47,20 @@
                                 </nav>
                             </div>
                             <a class="nav-link" href="<?php echo base_url; ?>Clientes">
-                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-users text-primary"></i></div>
                                 Clientes
                             </a>
                             <a class="nav-link" href="<?php echo base_url; ?>Medidas">
-                                <div class="sb-nav-link-icon"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-plus-square text-primary" aria-hidden="true"></i></div>
                                 Medidas
                             </a>
                             <a class="nav-link" href="<?php echo base_url; ?>Categorias">
-                                <div class="sb-nav-link-icon"><i class="fa fa-cube" aria-hidden="true"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-cube text-primary" aria-hidden="true"></i></div>
                                 Categorias
+                            </a>
+                            <a class="nav-link" href="<?php echo base_url; ?>Productos">
+                                <div class="sb-nav-link-icon"><i class="fab fa-product-hunt text-primary" aria-hidden="true"></i></div>
+                                Productos
                             </a>
                             
                         </div>
