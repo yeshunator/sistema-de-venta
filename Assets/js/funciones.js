@@ -1074,7 +1074,6 @@ function btnEditarPro(id) {
                 <button class="btn btn-danger" onclick="deleteImg()"><i class="fas fa-times"></i></button>`;
                 document.getElementById("icon-image").classList.add("d-none");
                 document.getElementById("foto_actual").value = res.foto;
-                document.getElementById("foto_delete").value = res.foto;
                 $("#nuevo_producto").modal("show");
             }
         }
@@ -1177,5 +1176,5 @@ function deleteImg() {
     document.getElementById("icon-image").classList.remove("d-none");
     document.getElementById("img-preview").src = '';
     document.getElementById("imagen").value = '';
-    document.getElementById("foto_delete").value = '';
+    document.getElementById("foto_actual").value = '';
 }
