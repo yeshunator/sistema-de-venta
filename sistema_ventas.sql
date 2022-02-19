@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-01-2022 a las 02:46:39
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.0
+-- Tiempo de generación: 20-02-2022 a las 00:23:08
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -134,9 +134,10 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `codigo`, `descripcion`, `precio_compra`, `precio_venta`, `cantidad`, `id_medida`, `id_categoria`, `foto`, `estado`) VALUES
 (1, '7414', 'cuaderno rojo modificado', '5.00', '10.00', 0, 1, 4, 'default.png', 1),
-(2, '456', 'imagen modificado', '40.00', '50.00', 0, 1, 3, 'default.png', 1),
-(3, '123', 'sdadaqw', '80.00', '100.00', 0, 1, 1, 'default.png', 1),
-(5, '956', 'sdasd', '40.00', '80.00', 0, 1, 1, 'default.png', 1);
+(2, '456', 'imagen modificado', '40.00', '50.00', 0, 1, 3, '20220219224547.jpg', 1),
+(3, '123', 'sdadaqw', '80.00', '100.00', 0, 1, 1, '20220219222951.jpg', 1),
+(5, '956', 'sdasd', '40.00', '80.00', 0, 1, 1, '20220219224405.jpg', 1),
+(8, '957', 'mjugyf', '5.00', '15.00', 0, 1, 2, 'default.png', 1);
 
 -- --------------------------------------------------------
 
@@ -240,7 +241,7 @@ ALTER TABLE `medidas`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
