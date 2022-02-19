@@ -8,4 +8,13 @@ class Compras extends Controller{
     {
         $this->views->getView($this, "index");
     }
+    public function buscarCodigo($cod)
+    {
+        $data = $this->model->getProcod($cod);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 }
+
+
+?>
