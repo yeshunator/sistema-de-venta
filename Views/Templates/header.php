@@ -62,6 +62,10 @@
                                 <div class="sb-nav-link-icon"><i class="fab fa-product-hunt text-primary" aria-hidden="true"></i></div>
                                 Productos
                             </a>
+                            <a class="nav-link" href="<?php echo base_url; ?>Compras">
+                                <div class="sb-nav-link-icon"><i class="fab fa-product-hunt text-primary" aria-hidden="true"></i></div>
+                                Compras
+                            </a>
                             
                         </div>
                     </div>

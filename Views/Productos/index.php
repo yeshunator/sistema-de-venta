@@ -87,7 +87,7 @@
                           <span id="icon-cerrar"></span>
                         <input id="imagen" class="d-none" type="file" name="imagen" onchange="preview(event)">
                         <input type="hidden" id="foto_actual" name="foto_actual">
-                        <input type="hidden" id="foto_delete" name="foto_delete">
+                        <!-- <input type="hidden" id="foto_delete" name="foto_delete"> -->
                         <img class="img-thumbnail" id="img-preview">
                         </div>
                       </div>
