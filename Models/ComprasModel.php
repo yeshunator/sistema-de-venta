@@ -10,6 +10,12 @@ class ComprasModel extends Query{
        $data = $this->select($sql);
        return $data;
    }
+   public function getProductos(int $id)
+   {
+       $sql = "SELECT * FROM productos WHERE id = $id";
+       $data = $this->select($sql);
+       return $data;
+   }
 }
 
 ?>

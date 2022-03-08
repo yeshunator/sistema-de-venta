@@ -1211,9 +1211,24 @@ function buscarCodigo(e) {
         }
     }
 }
+
 function calcularPrecio(e) {
     e.preventDefault();
     const cant = document.getElementById("cantidad").value;
     const precio = document.getElementById("precio").value;
     document.getElementById("sub_total").value = precio * cant;
+    if (e.which == 13) {
+        if (cant > 0) {
+            const url = base_url + "Compras/ingresar";
+            const frm = document.getElementById("frmCompra");
+            const http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(new FormData(frm));
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+            }
+        }
+    }
 }

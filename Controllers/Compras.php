@@ -14,6 +14,17 @@ class Compras extends Controller{
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+    public function ingresar()
+    {
+        $id = $_POST['id'];
+        $datos = $this->model->getProductos($id);
+        $id_producto = $datos['id'];
+        $id_usuario = $_SESSION['id_usuario'];
+        $precio = $datos['precio'];
+        $cantidad = $_POST['cantidad'];
+        $sub_total = $precio * $cantidad;
+        $data = $this->model->registrarDetalle($id_producto, $id_usuario, $precio, $cantidad, $sub_total);
+    }
 }
 
 
