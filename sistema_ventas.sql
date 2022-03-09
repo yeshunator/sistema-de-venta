@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-02-2022 a las 00:23:08
+-- Tiempo de generación: 09-03-2022 a las 01:26:03
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -87,6 +87,29 @@ INSERT INTO `clientes` (`id`, `dni`, `nombre`, `telefono`, `direccion`, `estado`
 (2, '75422899', 'jorge castillo', '912586745', 'peru', 1),
 (3, '7563753', 'sdfsdfs', '78678678', 'dsfsdf', 1),
 (4, '75385612', 'asdasd', 'asdasd', 'asdasda', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle`
+--
+
+CREATE TABLE `detalle` (
+  `id` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `precio` decimal(10,0) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `sub_total` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle`
+--
+
+INSERT INTO `detalle` (`id`, `id_producto`, `id_usuario`, `precio`, `cantidad`, `sub_total`) VALUES
+(1, 1, 1, '5', 11, '55'),
+(2, 2, 1, '40', 80, '3200');
 
 -- --------------------------------------------------------
 
@@ -187,6 +210,12 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `detalle`
+--
+ALTER TABLE `detalle`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `medidas`
 --
 ALTER TABLE `medidas`
@@ -230,6 +259,12 @@ ALTER TABLE `categorias`
 --
 ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle`
+--
+ALTER TABLE `detalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `medidas`
