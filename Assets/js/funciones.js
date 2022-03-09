@@ -1211,9 +1211,52 @@ function buscarCodigo(e) {
         }
     }
 }
+
 function calcularPrecio(e) {
     e.preventDefault();
     const cant = document.getElementById("cantidad").value;
     const precio = document.getElementById("precio").value;
     document.getElementById("sub_total").value = precio * cant;
+    if (e.which == 13) {
+        if (cant > 0) {
+            const url = base_url + "Compras/ingresar";
+            const frm = document.getElementById("frmCompra");
+            const http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(new FormData(frm));
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == 'ok') {
+                        frm.reset();
+                        cargarDetalle();
+                    }
+                }
+            }
+        }
+    }
+}
+cargarDetalle();
+function cargarDetalle() {
+    const url = base_url + "Compras/listar";
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            let html = '';
+            res.forEach(row => {
+                html += `<tr>
+                <td>${row['id']}</td>
+                <td>${row['descripcion']}</td>
+                <td>${row['cantidad']}</td>
+                <td>${row['precio']}</td>
+                <td>${row['sub_total']}</td>
+                <td></td>
+                </tr>`;
+            });
+            document.getElementById("tblDetalle").innerHTML = html;
+        }
+    }
 }

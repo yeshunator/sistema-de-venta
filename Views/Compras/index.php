@@ -1,17 +1,14 @@
 <?php include "Views/Templates/header.php"; ?>
-<ol class="breadcrumb mb-4">
-    <!-- <li class="breadcrumb-item active">Usuarios</li> NO BORRAR -->
-    <div class="alert alert-primary" role="alert">
-        Nueva Compra
-    </div>
-</ol>
 <div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4>Nueva Compra</h4>
+    </div>
     <div class="card-body">
         <form id="frmCompra">
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="codigo">Codigo de barras</label>
+                        <label for="codigo"><i class="fas fa-barcode"></i> Codigo de barras</label>
                         <input type="hidden" id="id" name="id">
                         <input id="codigo" type="text" class="form-control" type="text" name="codigo" placeholder="Ingrese el codigo de barras" onkeyup="buscarCodigo(event)">
                     </div>
@@ -45,11 +42,10 @@
         </form>
     </div>
 </div>
-<table class="table table-dark">
-    <thead>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
         <tr>
             <th>Id</th>
-            <th>Codigo</th>
             <th>Descripcion</th>
             <th>Cantidad</th>
             <th>Precio</th>
@@ -57,7 +53,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tblDetalle">
     </tbody>
 </table>
 <div class="row">
