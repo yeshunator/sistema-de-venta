@@ -1226,9 +1226,37 @@ function calcularPrecio(e) {
             http.send(new FormData(frm));
             http.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    if (res == 'ok') {
+                        frm.reset();
+                        cargarDetalle();
+                    }
                 }
             }
+        }
+    }
+}
+cargarDetalle();
+function cargarDetalle() {
+    const url = base_url + "Compras/listar";
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            let html = '';
+            res.forEach(row => {
+                html += `<tr>
+                <td>${row['id']}</td>
+                <td>${row['descripcion']}</td>
+                <td>${row['cantidad']}</td>
+                <td>${row['precio']}</td>
+                <td>${row['sub_total']}</td>
+                <td></td>
+                </tr>`;
+            });
+            document.getElementById("tblDetalle").innerHTML = html;
         }
     }
 }
